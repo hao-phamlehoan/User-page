@@ -10,8 +10,8 @@ function App() {
         <Router>
             <Header Login={false}></Header>
             <Routes>
-                <Route path = "/" element = {<Home />} />
-                <Route path = "/user" element = {<Userpage />} />
+                <Route path = "User-page/" element = {<Home />} />
+                <Route path = "User-page/user" element = {<Userpage />} />
             </Routes>
         </Router>
     )
