@@ -1,0 +1,24 @@
+#footer {
+    background: #292a2c;
+    color: white;
+    margin: 0 auto;
+    display: flex;
+}
+#footer p {
+    font-weight: bold;
+    width: 70%;
+}
+
+#footer img {
+    margin-right: 10px;
+}
+
+#footer .m_container > span a{
+    color: white;
+    margin: 10px;
+}
+
+#footer .m_container > span a:hover{
+    color: #00902A;
+}
+

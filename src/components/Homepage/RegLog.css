@@ -1,0 +1,115 @@
+.reglog_container {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.reglog {
+    padding: 10px 20px;
+    border-radius: 50px;
+    background-color: #00902A;
+    color: white;
+    width: 100px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.reglog:hover {
+    background-color: grey;
+}
+/* Reg */
+.log, .reg { 
+    display: flex;
+    position: fixed;  
+    background-color: rgba(0, 0, 0, 0.4);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center; 
+    z-index: 999;  
+}
+
+.reg_container {
+    width: 50%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 16px;
+    overflow-y: scroll; 
+}
+
+.reglog_header {
+    font-size: 30px;
+    height: 100px;
+    font-weight: bold;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reglog_body {
+    padding: 0 50px;
+}
+.reglog_label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.reglog_input {
+    margin: 10px 0 14px 0;
+    border: 2px solid #ccc;
+    padding: 10px 20px 10px 20px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.reglog_body button {
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 15px;
+    background-color: #00902A;
+    border: none;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+}
+
+.reglog_body button:hover {
+    background-color: #C9F0C3;
+}
+
+/* Login*/
+
+.log_container {
+    border-radius: 10px;
+    padding: 30px;
+    width: 40%;
+    background-color: #00902A;
+    overflow-y: scroll;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.log .reglog_body button {
+    background-color: black;
+}
+

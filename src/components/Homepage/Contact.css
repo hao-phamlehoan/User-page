@@ -1,0 +1,36 @@
+#contact {
+    background-color: #383838;
+    color: white;
+}
+
+#contact iframe {
+    width: 100%;
+}
+
+#contact .m_container > div:nth-child(1)  {
+    width: 30%;
+}
+
+#contact .m_container > div:nth-child(2) {
+    width: 70%;
+}
+
+.info {
+    width: 60%;
+    margin: 0 auto;
+    line-height: 25px;
+}
+
+.info span {
+    position: absolute;
+    vertical-align: middle;
+}
+
+.info > div {
+    position: relative;
+    margin: 20px;
+}
+
+.info > div p {
+    margin-left: 30px;
+}

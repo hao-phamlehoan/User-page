@@ -1,0 +1,74 @@
+/* PC */
+@media (min-width: 1024px) {
+    .checkbtn{
+        display: none;
+    }
+}
+
+/* Tablet & mobile */
+@media (max-width: 1023px) {
+    :root{
+        --header-height: 120px
+    }
+    .checkbtn{
+        font-size: 48px;
+        color: #fff;
+        margin: 16px;
+        display: block;
+    }
+    .header__navbar-list{
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background-color: #8cb486;
+        top: 72px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+    .header__navbar-list li{
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+
+    .header__navbar-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.4rem;
+        margin: 0 32px;
+    }
+    .header__navbar-item:hover{
+        background-color: #08a838;
+        border-radius: 4px;
+    }
+    #check:checked~ul {
+        left: 0;
+    }
+    .checkbtn:hover{
+        cursor: pointer;
+        opacity: 0.8;
+    }
+
+    .header-user-name{
+        display: none;
+    }
+    .header__navbar-user{
+        margin: 12px;
+        order: 3;
+    }
+    .btn{
+        font-size: 1.8rem;
+    }
+}
+/* Tablet  */
+@media (min-width: 740px) and (max-width: 1023px) {
+    
+}
+
+/* Mobile  */
+@media (max-width: 740px) {
+    
+}
