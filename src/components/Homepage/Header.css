@@ -3,7 +3,7 @@
     height: 120px;
     position:fixed;
     top: 0;
-    width: 100vw;
+    width: 100%;
     z-index: 1;
 }
 
@@ -76,6 +76,6 @@
 }
 .header-user-name {
     margin: 0 16px 0 8px;
-    font-size: 80%;
+    font-size: 20px;
     font-weight: 400;
 }

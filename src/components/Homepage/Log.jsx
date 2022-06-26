@@ -23,7 +23,6 @@ const Log = ({setOpenLog}) => {
         localStorage.setItem('user', JSON.stringify(tokenDetails.user))
         localStorage.setItem('admin', JSON.stringify(tokenDetails.isAdmin))
         localStorage.setItem('isLogined', 'true')
-        console.log(localStorage.getItem("user"))
     }
 
     function login(e) {

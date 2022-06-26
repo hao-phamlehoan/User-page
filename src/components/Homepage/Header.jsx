@@ -9,6 +9,7 @@ import {AiOutlineLogout} from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
 import {  useLocation } from 'react-router-dom';
 import '../Homepage/Header.css'
+import '../../routes/Home.css'
 
 const Logout = () => {
     localStorage.clear()

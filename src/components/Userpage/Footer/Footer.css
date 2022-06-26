@@ -1,4 +1,4 @@
-#footer {
+#footer1 {
     background: #292a2c;
     color: white;
     margin: 0 auto;
@@ -8,21 +8,21 @@
     width: 100%;
     min-width: 548px;
 }
-#footer p {
+#footer1 p {
     font-weight: bold;
     width: 70%;
 }
 
-#footer img {
+#footer1 img {
     margin-right: 10px;
 }
 
-#footer .m_container > span a{
+#footer1 .m_container > span a{
     color: white;
     margin: 10px;
 }
 
-#footer .m_container > span a:hover{
+#footer1 .m_container > span a:hover{
     color: #00902A;
 }
 
