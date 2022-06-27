@@ -38,8 +38,11 @@ const Log = ({setOpenLog}) => {
             }
             else {
                 saveToken(res.data)
-                if (localStorage.getItem("admin") == "false") navigate(location.pathname + "user", { replace: true })
-                else navigate(location.pathname + "admin", { replace: true })
+                if (localStorage.getItem("admin") == "false") {
+                    navigate(location.pathname + "user", { replace: true })
+                } else {
+                    navigate(location.pathname + "admin", { replace: true })
+                }
                 setOpenLog(false)
             }
         })

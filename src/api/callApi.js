@@ -5,6 +5,10 @@ const callApi = {
         const url = `/business/byId/${id}`;
         return axiosClient.get(url);
     },
+    getBooth: (id) => {
+        const url = `/register/byIdbusiness/${id}`;
+        return axiosClient.get(url);
+    },
     getBoothMap: (params) => {
         const url = '/booth/all';
         return axiosClient.get(url, {params});

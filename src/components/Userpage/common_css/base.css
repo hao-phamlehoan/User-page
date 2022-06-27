@@ -56,6 +56,10 @@ ul{
     background-color: #ff5050 !important;
     color: #fff;
 }
+.btn-wait{
+    background-color: #ea9605 !important;
+    color: #fff;
+}
 .btn-note{
     cursor: default;
     width: 40px;

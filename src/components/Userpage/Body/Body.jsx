@@ -38,11 +38,13 @@ function Body() {
   const [phone, setPhone] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [chooseIndex, setIndex] = React.useState('');
+  const [reloadBooth, setReloadBooth] = React.useState(false);
 
 
   const [arr, setArr] = React.useState([]);
   const [Rejectarr, setRejectArr] = React.useState([]);
   const [Activearr, setActiveArr] = React.useState([]);
+  const [Waitarr, setWaitArr] = React.useState([]);
 
   function initArr() {
     for (var i = 0; i < 65; i++) {
@@ -51,6 +53,9 @@ function Body() {
       }
       else if (Activearr.find(v => { return v === i })) {
         arr[i] = 'btn btn-active';
+      }
+      else if (Waitarr.find(v => { return v === i })) {
+        arr[i] = 'btn btn-wait';
       }
       else {
         arr[i] = 'btn'
@@ -99,7 +104,8 @@ function Body() {
     var a = []
     var count = 0;
     for (var i = 1; i < 65; i++) {
-      if (!Rejectarr.find(v => { return v === i }) && !Activearr.find(v => { return v === i }) && count < 5) {
+      if (!Rejectarr.find(v => { return v === i }) && !Activearr.find(v => { return v === i }) && 
+          !Waitarr.find(v => { return v === i }) && count < 5) {
         a.push(i);
         count++;
       }
@@ -116,7 +122,11 @@ function Body() {
       return
     }
     else if (Activearr.find(v => { return v === index })) {
-      alert('You booked this booth')
+      alert(`${index} is your booth`)
+      return
+    }
+    else if (Waitarr.find(v => { return v === index })) {
+      alert('You booked this booth. Please wait')
       return
     }
     setVisibleI(false);
@@ -165,19 +175,23 @@ function Body() {
         alert('This booth was booked')
         return
       } else if (Activearr.find(v => { return v == chooseIndex })) {
+        alert(`${chooseIndex} is your booth`)
+        return
+      } else if (Waitarr.find(v => { return v == chooseIndex })) {
         alert('You booked this booth')
         return
       }
       const id = await callApi.getID();
-      var time = new Date();
+      var time = new Date().toISOString().slice(0, 19).replace('T', ' ');
       const application = {
         "id": id.result + 1,
-        "time_register": time.toLocaleString(),
+        "time_register": time,
         "business_id": idUser,
-        "booth_id": 1
+        "booth_id": chooseIndex
       }
       await callApi.putRegister(application);
       alert("Register succesful");
+      setReloadBooth(true);
     } catch (error) {
       console.log("Failed to put reg: ", error);
     }
@@ -199,6 +213,7 @@ function Body() {
         setRepresentation(user.representation);
         setRepresentationI(user.representation);
         const boothMap = await callApi.getBoothMap();
+        const boothid = await callApi.getBooth(user.id);
         const loadToArr = () => {
           for (var i = 0; i < 64; i++) {
             if (boothMap.result[i].owner == user.id) {
@@ -213,6 +228,13 @@ function Body() {
               } else {
                 Rejectarr.push(i + 1);
               }
+            } 
+          }
+          for (var i in boothid.result) {
+            if (Waitarr.find(v => {return v === boothid.result[i].booth_id})) {
+              continue
+            } else {
+              Waitarr.push(boothid.result[i].booth_id);
             }
           }
         }
@@ -223,7 +245,7 @@ function Body() {
       }
     }
     fetchUser();
-  }, [])
+  }, [reloadBooth])
 
   return (
     <div className="app__container">
@@ -527,6 +549,10 @@ function Body() {
                       <li className="note-item">
                         <div className="btn-note" />
                         <span>Available</span>
+                      </li>
+                      <li className="note-item">
+                        <div className="btn-wait btn-note" />
+                        <span>Booking</span>
                       </li>
                       <li className="note-item">
                         <div className="btn-active btn-note" />
