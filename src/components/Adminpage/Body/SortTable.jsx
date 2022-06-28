@@ -60,11 +60,48 @@ function Table() {
     })();
   }
 
+  function updateBooth(input) {
+    (async () => {
+      // PUT request using fetch with async/await
+      const booth = input.booth_id
+      const owner = input.business_id
+      console.log('input : ', input)
+      let item = {
+        "id": booth, 
+        "owner": owner
+      }
+      console.log('item: ', item)
+      const requestOptions = {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(item)
+      };
+      const response = await fetch('https://jfresgister-booth-api.herokuapp.com/booth/owner', requestOptions);
+      const data = await response.json();
+      console.log('update :', data)
+    })();
+  }
+
   function agreeClick(result) {
     result.approve = 1
+    const slot = result.booth_id
+    rejectRemain(slot)
     updateData(result)
+    updateBooth(result)
     console.log('agree click : ',data)
     setFilter(!filter)
+  }
+
+  function rejectRemain(slot){
+    for(var i = 0; i < data.length; i++) {
+      if(data[i].booth_id === slot)
+      {
+        if(data[i].approve != 1)
+        {
+          rejectClick(data[i])
+        }
+      }
+    }
   }
 
   function rejectClick(result) {

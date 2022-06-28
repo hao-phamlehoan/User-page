@@ -1,16 +1,16 @@
 import './Userpage.css';
-import React, { useState } from 'react';
-import Body from '../components/Userpage/Body/Body';
+import React from 'react';
+import Body from '../components/Adminpage/Body/Body';
 import Footer from '../components/Userpage/Footer/Footer';
 import './Home.css';
 
-const Userpage = () => {
+const Adminpage = () => {
     return (
-        <div className="Home">
+        <div className='Home'>
             <Body></Body>
             <Footer></Footer>
         </div>
     );
 }
 
-export default Userpage;
+export default Adminpage;

@@ -13,23 +13,27 @@ const Reg = ({setOpenReg}) => {
         conf_password: ""
     })
     function submit(e) {
+        console.log(data);
         if (!(data.password === data.conf_password)) {
             e.preventDefault()
             alert("The passwords you entered did not match\nPlease try again!")
         } else { 
+            e.preventDefault()
+            
             Axios.get('https://jfresgister-booth-api.herokuapp.com/business/maxid')
             .then(res => {
                 data.id = JSON.parse(res.data.result) + 1
             })
             Axios.post(url, {
-                id: data.id,
-                name: data.name,
-                phone: data.phone,
-                email: data.email,
-                representation: data.representation,
-                password: data.password
+                "id": data.id,
+                "name": data.name,
+                "phone": data.phone,
+                "email": data.email,
+                "representation": data.representation,
+                "password": data.password
             })
             .then(res => {
+                console.log("res: ",res);
                 alert("Register successfully!!!")
             })
         }

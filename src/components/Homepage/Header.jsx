@@ -21,6 +21,7 @@ const Header = ({ Login }) => {
     const navigate = useNavigate();
     const location = useLocation();
     if ("isLogined" in localStorage) Login = true
+
     return (
         <header id="header">
             <div className="m_container">
@@ -37,30 +38,35 @@ const Header = ({ Login }) => {
                     </div>
                 </div>
                 {Login ? (
-                    <div id = "header_login">
-                        <div className="header__navbar-user" onClick = {() => {
-                                console.log(location.pathname)
-                                if (location.pathname !== "/User-page/user" && localStorage.getItem("admin") == "false") navigate(location.pathname + "user", { replace: true })
-                                else if (location.pathname !== "/User-page/admin" && localStorage.getItem("admin") == "true") navigate(location.pathname + "admin", { replace: true })
-                            }}>
-                            <img src = {avatar} alt="" className="header-user-img" />
+                    <div id="header_login">
+                        <div className="header__navbar-user" onClick={() => {
+                            if (location.pathname !== "/User-page/user" && localStorage.getItem("admin") == "false") navigate("/User-page/user", { replace: true })
+                            else if (location.pathname !== "/User-page/admin" && localStorage.getItem("admin") == "true") navigate("/User-page/admin", { replace: true })
+                        }}>
+                            <img src={avatar} alt="" className="header-user-img" />
                             <span className="header-user-name">{JSON.parse(localStorage.getItem("user")).name}</span>
+                            <Link smooth to="/User-page/">
+                                <ul className="header__navbar-user-menu">
+                                    <li onClick={Logout} className="header__navbar-user-item">
+                                        Log out
+                                    </li>
+                                </ul>
+                            </Link>
                         </div>
-                        <Link smooth to = "/User-page/"><AiOutlineLogout onClick = {Logout} size = {40} id = "logout_icon"/></Link>
                     </div>
-            ) : (
-            <div id="header_reg_log">
-                <div className="reglog_container">
-                    <span onClick={() => setOpenReg(true)} className="reglog">Register</span>
-                    <span onClick={() => setOpenLog(true)} className="reglog">Login</span>
-                </div>
-            </div> 
+                ) : (
+                    <div id="header_reg_log">
+                        <div className="reglog_container">
+                            <span onClick={() => setOpenReg(true)} className="reglog">Register</span>
+                            <span onClick={() => setOpenLog(true)} className="reglog">Login</span>
+                        </div>
+                    </div>
                 )}
-        </div>
-            { showReg && <Reg setOpenReg={setOpenReg} /> }
-    { showLog && <Log setOpenLog={setOpenLog} /> }          
-        </header >   
-        
+            </div>
+            {showReg && <Reg setOpenReg={setOpenReg} />}
+            {showLog && <Log setOpenLog={setOpenLog} />}
+        </header >
+
     );
 }
 

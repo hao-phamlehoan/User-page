@@ -39,9 +39,11 @@ const Log = ({setOpenLog}) => {
             else {
                 saveToken(res.data)
                 if (localStorage.getItem("admin") == "false") {
-                    navigate(location.pathname + "user", { replace: true })
+                    navigate("/User-page/user", { replace: true })
+                    window.location.reload(false);
                 } else {
-                    navigate(location.pathname + "admin", { replace: true })
+                    navigate("/User-page/admin", { replace: true })
+                    window.location.reload(false);
                 }
                 setOpenLog(false)
             }

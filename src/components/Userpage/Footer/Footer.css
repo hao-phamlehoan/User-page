@@ -1,5 +1,5 @@
 #footer1 {
-    background: #292a2c;
+    background: #666666;
     color: white;
     margin: 0 auto;
     display: flex;
@@ -26,3 +26,6 @@
     color: #00902A;
 }
 
+.footer-icon{
+    size: 40;
+}

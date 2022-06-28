@@ -7,6 +7,7 @@ import ava from "../../../assets/User_img/user-avatar-filled-alt.jpg";
 import big_logo from "../../../assets/User_img/big_logo.png";
 import { useEffect } from "react";
 import callApi from "../../../api/callApi";
+import NotFound from "../../NotFound";
 
 function Body() {
   // biến ẩn hiện phần tử
@@ -40,6 +41,10 @@ function Body() {
   const [chooseIndex, setIndex] = React.useState('');
   const [reloadBooth, setReloadBooth] = React.useState(false);
 
+  //change password
+  const [currpass, setCurrpass] = React.useState('');
+  const [newpass, setNewpass] = React.useState('');
+  const [confpass, setConfpass] = React.useState('');
 
   const [arr, setArr] = React.useState([]);
   const [Rejectarr, setRejectArr] = React.useState([]);
@@ -116,6 +121,7 @@ function Body() {
   const handleChangeInfor = () => {
     setChangeInfor(true)
   }
+
   const handleButton = (index) => {
     if (Rejectarr.find(v => { return v === index })) {
       alert('This booth was booked')
@@ -149,11 +155,19 @@ function Body() {
         "email": emailI,
         "representation": representationI
       }
+      var Getuser = localStorage.getItem("user");
+      const user = JSON.parse(Getuser);
+      const newUser1 = {
+        "email": emailI,
+        "id": idUser,
+        "name": nameI,
+        "password": user.password,
+        "phone": phoneI,
+        "representation": representationI,
+      }
       callApi.putInformation(newUser);
-      localStorage.setItem('user', JSON.stringify(newUser));
-      localStorage.removeItem('User')
-      localStorage.removeItem('Name')
-      alert("Save succesful");
+      localStorage.setItem('user', JSON.stringify(newUser1));
+      alert("Save successful");
       // setName(nameI);
       // setName_img(nameI);
       // setPhone(phoneI);
@@ -190,15 +204,48 @@ function Body() {
         "booth_id": chooseIndex
       }
       await callApi.putRegister(application);
-      alert("Register succesful");
+      alert("Register successful");
       setReloadBooth(true);
     } catch (error) {
       console.log("Failed to put reg: ", error);
     }
   }
 
+  const handleChangePass = async () => {
+    const Getuser = localStorage.getItem("user");
+    const user = JSON.parse(Getuser);
+    console.log(user);
+    console.log(currpass);
+    
+    if (currpass === user.password) {
+      if (newpass === confpass) {
+        var item = {
+          "id": user.id,
+          "curpassword": currpass,
+          "newpassword": newpass
+        }
+        await callApi.putPassword(item)
+        const newUser1 = {
+          "email": user.email,
+          "id": user.id,
+          "name": user.name,
+          "password": newpass,
+          "phone": user.phone,
+          "representation": user.representation,
+        }
+        localStorage.setItem('user', JSON.stringify(newUser1));
+        alert ('Change password successful')
+      } else {
+        alert ('Confirm password incorrect')
+      }
+    } else {
+      alert('Password incorrect');
+    }
+  }
+
   useEffect(() => {
     const fetchUser = async () => {
+      console.log(1);
       try {
         var Getuser = localStorage.getItem("user");
         const user = JSON.parse(Getuser);
@@ -246,6 +293,13 @@ function Body() {
     }
     fetchUser();
   }, [reloadBooth])
+
+  const login = localStorage.getItem("isLogined");
+  if (login != "true") {
+    return (
+      <NotFound></NotFound>
+    )
+  }
 
   return (
     <div className="app__container">
@@ -654,24 +708,24 @@ function Body() {
                   <li className="register-item">
                     <fieldset>
                       <legend>Current Password</legend>
-                      <input className="input no-outline" type="password" required />
+                      <input className="input no-outline" type="password" onChange={event => setCurrpass(event.target.value)} required />
                     </fieldset>
                   </li>
                   <li className="register-item">
                     <fieldset>
                       <legend>New Password</legend>
-                      <input className="input no-outline" type="password" required />
+                      <input className="input no-outline" type="password" onChange={event => setNewpass(event.target.value)} required />
                     </fieldset>
                   </li>
                   <li className="register-item">
                     <fieldset>
                       <legend>Confirm Password</legend>
-                      <input className="input no-outline" type="password" required />
+                      <input className="input no-outline" type="password" onChange={event => setConfpass(event.target.value)} required />
                     </fieldset>
                   </li>
 
                 </ul>
-                <div className="register-btn" onClick={() => handleButton()}>
+                <div className="register-btn" onClick={() => handleChangePass()}>
                   <span>Change</span>
                 </div>
               </div>

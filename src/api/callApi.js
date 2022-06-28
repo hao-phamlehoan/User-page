@@ -26,7 +26,7 @@ const callApi = {
         axiosClient.post(url, params, {});
     },
     putPassword: (params) => {
-        const url = '';
+        const url = '/business/changepass/';
         axiosClient.put(url, params, {});
     },
     putAvatar: (params) =>{
