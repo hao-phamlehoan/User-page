@@ -21,8 +21,10 @@ const Header = ({ Login }) => {
     const location = useLocation();
     if ("isLogined" in localStorage) Login = true
 
-    function getNickName(name) {
-        var Namearr = name.split(' ')
+    function getNickName() {
+        if (localStorage.getItem("admin") == "true") return "ADMIN";
+        var nameRe = JSON.parse(localStorage.getItem("user")).representation
+        var Namearr = nameRe.split(' ')
         return Namearr[Namearr.length - 1];
       }
     return (
@@ -43,11 +45,11 @@ const Header = ({ Login }) => {
                 {Login ? (
                     <div id="header_login">
                         <div className="header__navbar-user" onClick={() => {
-                            if (location.pathname !== "/User-page/user" && localStorage.getItem("admin") == "false") navigate(location.pathname + "user", { replace: true })
-                            else if (location.pathname !== "/User-page/admin" && localStorage.getItem("admin") == "true") navigate(location.pathname + "admin", { replace: true })
+                            if (location.pathname !== "/User-page/user" && localStorage.getItem("admin") == "false") navigate("/User-page/user", { replace: true })
+                            else if (location.pathname !== "/User-page/admin" && localStorage.getItem("admin") == "true") navigate("/User-page/admin", { replace: true })
                         }}>
                             <img src={avatar} alt="" className="header-user-img" />
-                            <span className="header-user-name">{getNickName(JSON.parse(localStorage.getItem("user")).representation)}</span>
+                            <span className="header-user-name">{getNickName()}</span>
                             <Link smooth to="/User-page/">
                                 <ul className="header__navbar-user-menu">
                                     <li onClick={Logout} className="header__navbar-user-item">
