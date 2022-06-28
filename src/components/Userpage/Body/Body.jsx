@@ -243,6 +243,11 @@ function Body() {
     }
   }
 
+  function getNickName(name) {
+    var Namearr = name.split(' ')
+    return Namearr[Namearr.length - 1];
+  }
+
   useEffect(() => {
     const fetchUser = async () => {
       console.log(1);
@@ -252,7 +257,7 @@ function Body() {
         setIdUser(user.id)
         setName(user.name);
         setNameI(user.name);
-        setName_img(user.name);
+        setName_img(getNickName(user.representation));
         setPhone(user.phone);
         setPhoneI(user.phone);
         setEmail(user.email)

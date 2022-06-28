@@ -5,7 +5,6 @@ import logo from '../../assets/HomePages_img/logo.png'
 import avatar from '../../assets/HomePages_img/user-avatar-filled-alt.jpg'
 import { HashLink as Link } from 'react-router-hash-link';
 import { FaAlignJustify } from "react-icons/fa"
-import { AiOutlineLogout } from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import '../Homepage/Header.css'
@@ -22,6 +21,10 @@ const Header = ({ Login }) => {
     const location = useLocation();
     if ("isLogined" in localStorage) Login = true
 
+    function getNickName(name) {
+        var Namearr = name.split(' ')
+        return Namearr[Namearr.length - 1];
+      }
     return (
         <header id="header">
             <div className="m_container">
@@ -44,7 +47,7 @@ const Header = ({ Login }) => {
                             else if (location.pathname !== "/User-page/admin" && localStorage.getItem("admin") == "true") navigate("/User-page/admin", { replace: true })
                         }}>
                             <img src={avatar} alt="" className="header-user-img" />
-                            <span className="header-user-name">{JSON.parse(localStorage.getItem("user")).name}</span>
+                            <span className="header-user-name">{getNickName(JSON.parse(localStorage.getItem("user")).representation)}</span>
                             <Link smooth to="/User-page/">
                                 <ul className="header__navbar-user-menu">
                                     <li onClick={Logout} className="header__navbar-user-item">
