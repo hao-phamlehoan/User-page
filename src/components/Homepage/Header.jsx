@@ -43,8 +43,8 @@ const Header = ({ Login }) => {
                 {Login ? (
                     <div id="header_login">
                         <div className="header__navbar-user" onClick={() => {
-                            if (location.pathname !== "/User-page/user" && localStorage.getItem("admin") == "false") navigate("/User-page/user", { replace: true })
-                            else if (location.pathname !== "/User-page/admin" && localStorage.getItem("admin") == "true") navigate("/User-page/admin", { replace: true })
+                            if (location.pathname !== "/User-page/user" && localStorage.getItem("admin") == "false") navigate(location.pathname + "user", { replace: true })
+                            else if (location.pathname !== "/User-page/admin" && localStorage.getItem("admin") == "true") navigate(location.pathname + "admin", { replace: true })
                         }}>
                             <img src={avatar} alt="" className="header-user-img" />
                             <span className="header-user-name">{getNickName(JSON.parse(localStorage.getItem("user")).representation)}</span>
