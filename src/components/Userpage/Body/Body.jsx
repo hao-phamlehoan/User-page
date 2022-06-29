@@ -51,6 +51,8 @@ function Body() {
   const [Activearr, setActiveArr] = React.useState([]);
   const [Waitarr, setWaitArr] = React.useState([]);
 
+  const [prices, setPrices] = React.useState([]);
+
   function initArr() {
     for (var i = 0; i < 65; i++) {
       if (Rejectarr.find(v => { return v === i })) {
@@ -109,8 +111,8 @@ function Body() {
     var a = []
     var count = 0;
     for (var i = 1; i < 65; i++) {
-      if (!Rejectarr.find(v => { return v === i }) && !Activearr.find(v => { return v === i }) && 
-          !Waitarr.find(v => { return v === i }) && count < 5) {
+      if (!Rejectarr.find(v => { return v === i }) && !Activearr.find(v => { return v === i }) &&
+        !Waitarr.find(v => { return v === i }) && count < 5) {
         a.push(i);
         count++;
       }
@@ -216,7 +218,7 @@ function Body() {
     const user = JSON.parse(Getuser);
     console.log(user);
     console.log(currpass);
-    
+
     if (currpass === user.password) {
       if (newpass === confpass) {
         var item = {
@@ -234,9 +236,9 @@ function Body() {
           "representation": user.representation,
         }
         localStorage.setItem('user', JSON.stringify(newUser1));
-        alert ('Change password successful')
+        alert('Change password successful')
       } else {
-        alert ('Confirm password incorrect')
+        alert('Confirm password incorrect')
       }
     } else {
       alert('Password incorrect');
@@ -248,9 +250,9 @@ function Body() {
     return Namearr[Namearr.length - 1];
   }
 
+
   useEffect(() => {
     const fetchUser = async () => {
-      console.log(1);
       try {
         var Getuser = localStorage.getItem("user");
         const user = JSON.parse(Getuser);
@@ -280,10 +282,11 @@ function Body() {
               } else {
                 Rejectarr.push(i + 1);
               }
-            } 
+            }
+            prices[i + 1] = boothMap.result[i].price;
           }
           for (var i in boothid.result) {
-            if (Waitarr.find(v => {return v === boothid.result[i].booth_id})) {
+            if (Waitarr.find(v => { return v === boothid.result[i].booth_id })) {
               continue
             } else {
               Waitarr.push(boothid.result[i].booth_id);
@@ -498,43 +501,127 @@ function Body() {
                           </tr>
                           <tr>
                             <td className="btn btn-none" />
-                            <td className={booth_arr[5]} onClick={() => handleButton(5)}>5</td>
-                            <td className={booth_arr[6]} onClick={() => handleButton(6)}>6</td>
-                            <td className={booth_arr[7]} onClick={() => handleButton(7)}>7</td>
-                            <td className={booth_arr[8]} onClick={() => handleButton(8)}>8</td>
+                            <td className={booth_arr[5]} onClick={() => handleButton(5)}>
+                              <p>5</p>
+                              <span className="price">{prices[5]}</span>
+                            </td>
+                            <td className={booth_arr[6]} onClick={() => handleButton(6)}>
+                              <p>6-</p>
+                              <span className="price">{prices[6]}</span>
+                            </td>
+                            <td className={booth_arr[7]} onClick={() => handleButton(7)}>
+                              <p>7-</p>
+                              <span className="price">{prices[7]}</span>
+                            </td>
+                            <td className={booth_arr[8]} onClick={() => handleButton(8)}>
+                              <p>8-</p>
+                              <span className="price">{prices[8]}</span>
+                            </td>
                             <td className="btn btn-none" />
-                            <td className={booth_arr[21]} onClick={() => handleButton(21)}>21</td>
-                            <td className={booth_arr[22]} onClick={() => handleButton(22)}>22</td>
-                            <td className={booth_arr[23]} onClick={() => handleButton(23)}>23</td>
-                            <td className={booth_arr[24]} onClick={() => handleButton(24)}>24</td>
+                            <td className={booth_arr[21]} onClick={() => handleButton(21)}>
+                              <p>21</p>
+                              <span className="price">{prices[21]}</span>
+                            </td>
+                            <td className={booth_arr[22]} onClick={() => handleButton(22)}>
+                              <p>22</p>
+                              <span className="price">{prices[22]}</span>
+                            </td>
+                            <td className={booth_arr[23]} onClick={() => handleButton(23)}>
+                              <p>23</p>
+                              <span className="price">{prices[23]}</span>
+                            </td>
+                            <td className={booth_arr[24]} onClick={() => handleButton(24)}>
+                              <p>24</p>
+                              <span className="price">{prices[24]}</span>
+                            </td>
                             <td className="btn btn-none" />
-                            <td className={booth_arr[33]} onClick={() => handleButton(33)}>33</td>
-                            <td className={booth_arr[34]} onClick={() => handleButton(34)}>34</td>
-                            <td className={booth_arr[34]} onClick={() => handleButton(35)}>35</td>
-                            <td className={booth_arr[36]} onClick={() => handleButton(36)}>36</td>
+                            <td className={booth_arr[33]} onClick={() => handleButton(33)}>
+                              <p>33</p>
+                              <span className="price">{prices[33]}</span>
+                            </td>
+                            <td className={booth_arr[34]} onClick={() => handleButton(34)}>
+                              <p>34</p>
+                              <span className="price">{prices[34]}</span>
+                            </td>
+                            <td className={booth_arr[34]} onClick={() => handleButton(35)}>
+                              <p>35</p>
+                              <span className="price">{prices[35]}</span>
+                            </td>
+                            <td className={booth_arr[36]} onClick={() => handleButton(36)}>
+                              <p>36</p>
+                              <span className="price">{prices[36]}</span>
+                            </td>
                             <td className="btn btn-none" />
-                            <td className={booth_arr[61]} onClick={() => handleButton(61)}>61</td>
-                            <td className={booth_arr[62]} onClick={() => handleButton(62)}>62</td>
+                            <td className={booth_arr[61]} onClick={() => handleButton(61)}>
+                              <p>61</p>
+                              <span className="price">{prices[61]}</span>
+                            </td>
+                            <td className={booth_arr[62]} onClick={() => handleButton(62)}>
+                              <p>62</p>
+                              <span className="price">{prices[62]}</span>
+                            </td>
                           </tr>
                           <tr>
                             <td className="btn btn-none" />
-                            <td className={booth_arr[9]} onClick={() => handleButton(9)}>9</td>
-                            <td className={booth_arr[10]} onClick={() => handleButton(10)}>10</td>
-                            <td className={booth_arr[11]} onClick={() => handleButton(11)}>11</td>
-                            <td className={booth_arr[12]} onClick={() => handleButton(12)}>12</td>
+                            <td className={booth_arr[9]} onClick={() => handleButton(9)}>
+                              <p>9-</p>
+                              <span className="price">{prices[9]}</span>
+                            </td>
+                            <td className={booth_arr[10]} onClick={() => handleButton(10)}>
+                              <p>10</p>
+                              <span className="price">{prices[10]}</span>
+                            </td>
+                            <td className={booth_arr[11]} onClick={() => handleButton(11)}>
+                              <p>11</p>
+                              <span className="price">{prices[11]}</span>
+                            </td>
+                            <td className={booth_arr[12]} onClick={() => handleButton(12)}>
+                              <p>12</p>
+                              <span className="price">{prices[12]}</span>
+                            </td>
                             <td className="btn btn-none" />
-                            <td className={booth_arr[57]} onClick={() => handleButton(57)}>57</td>
-                            <td className={booth_arr[58]} onClick={() => handleButton(58)}>58</td>
-                            <td className={booth_arr[59]} onClick={() => handleButton(59)}>59</td>
-                            <td className={booth_arr[60]} onClick={() => handleButton(60)}>60</td>
+                            <td className={booth_arr[57]} onClick={() => handleButton(57)}>
+                              <p>57</p>
+                              <span className="price">{prices[57]}</span>
+                            </td>
+                            <td className={booth_arr[58]} onClick={() => handleButton(58)}>
+                              <p>58</p>
+                              <span className="price">{prices[58]}</span>
+                            </td>
+                            <td className={booth_arr[59]} onClick={() => handleButton(59)}>
+                              <p>59</p>
+                              <span className="price">{prices[59]}</span>
+                            </td>
+                            <td className={booth_arr[60]} onClick={() => handleButton(60)}>
+                              <p>60</p>
+                              <span className="price">{prices[60]}</span>
+                            </td>
                             <td className="btn btn-none" />
-                            <td className={booth_arr[45]} onClick={() => handleButton(45)}>45</td>
-                            <td className={booth_arr[46]} onClick={() => handleButton(46)}>46</td>
-                            <td className={booth_arr[47]} onClick={() => handleButton(47)}>47</td>
-                            <td className={booth_arr[48]} onClick={() => handleButton(48)}>48</td>
+                            <td className={booth_arr[45]} onClick={() => handleButton(45)}>
+                              <p>45</p>
+                              <span className="price">{prices[45]}</span>
+                            </td>
+                            <td className={booth_arr[46]} onClick={() => handleButton(46)}>
+                              <p>46</p>
+                              <span className="price">{prices[46]}</span>
+                            </td>
+                            <td className={booth_arr[47]} onClick={() => handleButton(47)}>
+                              <p>47</p>
+                              <span className="price">{prices[47]}</span>
+                            </td>
+                            <td className={booth_arr[48]} onClick={() => handleButton(48)}>
+                              <p>48</p>
+                              <span className="price">{prices[48]}</span>
+                            </td>
                             <td className="btn btn-none" />
-                            <td className={booth_arr[63]} onClick={() => handleButton(63)}>63</td>
-                            <td className={booth_arr[64]} onClick={() => handleButton(64)}>64</td>
+                            <td className={booth_arr[63]} onClick={() => handleButton(63)}>
+                              <p>63</p>
+                              <span className="price">{prices[63]}</span>
+                            </td>
+                            <td className={booth_arr[64]} onClick={() => handleButton(64)}>
+                              <p>64</p>
+                              <span className="price">{prices[64]}</span>
+                            </td>
                           </tr>
                           <tr>
                             <td className="btn btn-none" />
@@ -550,52 +637,160 @@ function Body() {
                           <td className="btn btn-none" />
                         </tr>
                         <tr>
-                          <td className={booth_arr[1]} onClick={() => handleButton(1)}>1</td>
-                          <td className={booth_arr[2]} onClick={() => handleButton(2)}>2</td>
+                          <td className={booth_arr[1]} onClick={() => handleButton(1)}>
+                            <p>1-</p>
+                            <span className="price">{prices[1]}</span>
+                          </td>
+                          <td className={booth_arr[2]} onClick={() => handleButton(2)}>
+                            <p>2-</p>
+                            <span className="price">{prices[2]}</span>
+                          </td>
                           <td className="btn btn-none" />
-                          <td className={booth_arr[13]} onClick={() => handleButton(13)}>13</td>
-                          <td className={booth_arr[14]} onClick={() => handleButton(14)}>14</td>
-                          <td className={booth_arr[15]} onClick={() => handleButton(15)}>15</td>
-                          <td className={booth_arr[16]} onClick={() => handleButton(16)}>16</td>
+                          <td className={booth_arr[13]} onClick={() => handleButton(13)}>
+                            <p>13</p>
+                            <span className="price">{prices[13]}</span>
+                          </td>
+                          <td className={booth_arr[14]} onClick={() => handleButton(14)}>
+                            <p>14</p>
+                            <span className="price">{prices[14]}</span>
+                          </td>
+                          <td className={booth_arr[15]} onClick={() => handleButton(15)}>
+                            <p>15</p>
+                            <span className="price">{prices[15]}</span>
+                          </td>
+                          <td className={booth_arr[16]} onClick={() => handleButton(16)}>
+                            <p>16</p>
+                            <span className="price">{prices[16]}</span>
+                          </td>
                           <td className="btn btn-none" />
-                          <td className={booth_arr[25]} onClick={() => handleButton(25)}>25</td>
-                          <td className={booth_arr[26]} onClick={() => handleButton(26)}>26</td>
-                          <td className={booth_arr[27]} onClick={() => handleButton(27)}>27</td>
-                          <td className={booth_arr[28]} onClick={() => handleButton(28)}>28</td>
+                          <td className={booth_arr[25]} onClick={() => handleButton(25)}>
+                            <p>25</p>
+                            <span className="price">{prices[25]}</span>
+                          </td>
+                          <td className={booth_arr[26]} onClick={() => handleButton(26)}>
+                            <p>26</p>
+                            <span className="price">{prices[26]}</span>
+                          </td>
+                          <td className={booth_arr[27]} onClick={() => handleButton(27)}>
+                            <p>27</p>
+                            <span className="price">{prices[27]}</span>
+                          </td>
+                          <td className={booth_arr[28]} onClick={() => handleButton(28)}>
+                            <p>28</p>
+                            <span className="price">{prices[28]}</span>
+                          </td>
                           <td className="btn btn-none" />
-                          <td className={booth_arr[37]} onClick={() => handleButton(37)}>37</td>
-                          <td className={booth_arr[38]} onClick={() => handleButton(38)}>38</td>
-                          <td className={booth_arr[39]} onClick={() => handleButton(39)}>39</td>
-                          <td className={booth_arr[40]} onClick={() => handleButton(40)}>40</td>
+                          <td className={booth_arr[37]} onClick={() => handleButton(37)}>
+                            <p>37</p>
+                            <span className="price">{prices[37]}</span>
+                          </td>
+                          <td className={booth_arr[38]} onClick={() => handleButton(38)}>
+                            <p>38</p>
+                            <span className="price">{prices[38]}</span>
+                          </td>
+                          <td className={booth_arr[39]} onClick={() => handleButton(39)}>
+                            <p>39</p>
+                            <span className="price">{prices[39]}</span>
+                          </td>
+                          <td className={booth_arr[40]} onClick={() => handleButton(40)}>
+                            <p>40</p>
+                            <span className="price">{prices[40]}</span>
+                          </td>
                           <td className="btn btn-none" />
-                          <td className={booth_arr[49]} onClick={() => handleButton(49)}>49</td>
-                          <td className={booth_arr[50]} onClick={() => handleButton(50)}>50</td>
-                          <td className={booth_arr[51]} onClick={() => handleButton(51)}>51</td>
-                          <td className={booth_arr[52]} onClick={() => handleButton(52)}>52</td>
+                          <td className={booth_arr[49]} onClick={() => handleButton(49)}>
+                            <p>49</p>
+                            <span className="price">{prices[49]}</span>
+                          </td>
+                          <td className={booth_arr[50]} onClick={() => handleButton(50)}>
+                            <p>50</p>
+                            <span className="price">{prices[50]}</span>
+                          </td>
+                          <td className={booth_arr[51]} onClick={() => handleButton(51)}>
+                            <p>51</p>
+                            <span className="price">{prices[51]}</span>
+                          </td>
+                          <td className={booth_arr[52]} onClick={() => handleButton(52)}>
+                            <p>52</p>
+                            <span className="price">{prices[52]}</span>
+                          </td>
                         </tr>
                         <tr>
-                          <td className={booth_arr[3]} onClick={() => handleButton(3)}>3</td>
-                          <td className={booth_arr[4]} onClick={() => handleButton(4)}>4</td>
+                          <td className={booth_arr[3]} onClick={() => handleButton(3)}>
+                            <p>3-</p>
+                            <span className="price">{prices[3]}</span>
+                          </td>
+                          <td className={booth_arr[4]} onClick={() => handleButton(4)}>
+                            <p>4-</p>
+                            <span className="price">{prices[4]}</span>
+                          </td>
                           <td className="btn btn-none" />
-                          <td className={booth_arr[17]} onClick={() => handleButton(17)}>17</td>
-                          <td className={booth_arr[18]} onClick={() => handleButton(18)}>18</td>
-                          <td className={booth_arr[19]} onClick={() => handleButton(19)}>19</td>
-                          <td className={booth_arr[20]} onClick={() => handleButton(20)}>20</td>
+                          <td className={booth_arr[17]} onClick={() => handleButton(17)}>
+                            <p>17</p>
+                            <span className="price">{prices[17]}</span>
+                          </td>
+                          <td className={booth_arr[18]} onClick={() => handleButton(18)}>
+                            <p>18</p>
+                            <span className="price">{prices[18]}</span>
+                          </td>
+                          <td className={booth_arr[19]} onClick={() => handleButton(19)}>
+                            <p>19</p>
+                            <span className="price">{prices[19]}</span>
+                          </td>
+                          <td className={booth_arr[20]} onClick={() => handleButton(20)}>
+                            <p>20</p>
+                            <span className="price">{prices[20]}</span>
+                          </td>
                           <td className="btn btn-none" />
-                          <td className={booth_arr[29]} onClick={() => handleButton(29)}>29</td>
-                          <td className={booth_arr[30]} onClick={() => handleButton(30)}>30</td>
-                          <td className={booth_arr[31]} onClick={() => handleButton(31)}>31</td>
-                          <td className={booth_arr[32]} onClick={() => handleButton(32)}>32</td>
+                          <td className={booth_arr[29]} onClick={() => handleButton(29)}>
+                            <p>29</p>
+                            <span className="price">{prices[29]}</span>
+                          </td>
+                          <td className={booth_arr[30]} onClick={() => handleButton(30)}>
+                            <p>30</p>
+                            <span className="price">{prices[30]}</span>
+                          </td>
+                          <td className={booth_arr[31]} onClick={() => handleButton(31)}>
+                            <p>31</p>
+                            <span className="price">{prices[31]}</span>
+                          </td>
+                          <td className={booth_arr[32]} onClick={() => handleButton(32)}>
+                            <p>32</p>
+                            <span className="price">{prices[32]}</span>
+                          </td>
                           <td className="btn btn-none" />
-                          <td className={booth_arr[41]} onClick={() => handleButton(41)}>41</td>
-                          <td className={booth_arr[42]} onClick={() => handleButton(42)}>42</td>
-                          <td className={booth_arr[43]} onClick={() => handleButton(43)}>43</td>
-                          <td className={booth_arr[44]} onClick={() => handleButton(44)}>44</td>
+                          <td className={booth_arr[41]} onClick={() => handleButton(41)}>
+                            <p>41</p>
+                            <span className="price">{prices[41]}</span>
+                          </td>
+                          <td className={booth_arr[42]} onClick={() => handleButton(42)}>
+                            <p>42</p>
+                            <span className="price">{prices[42]}</span>
+                          </td>
+                          <td className={booth_arr[43]} onClick={() => handleButton(43)}>
+                            <p>43</p>
+                            <span className="price">{prices[43]}</span>
+                          </td>
+                          <td className={booth_arr[44]} onClick={() => handleButton(44)}>
+                            <p>44</p>
+                            <span className="price">{prices[44]}</span>
+                          </td>
                           <td className="btn btn-none" />
-                          <td className={booth_arr[53]} onClick={() => handleButton(53)}>53</td>
-                          <td className={booth_arr[54]} onClick={() => handleButton(54)}>54</td>
-                          <td className={booth_arr[55]} onClick={() => handleButton(55)}>55</td>
-                          <td className={booth_arr[56]} onClick={() => handleButton(56)}>56</td>
+                          <td className={booth_arr[53]} onClick={() => handleButton(53)}>
+                            <p>53</p>
+                            <span className="price">{prices[53]}</span>
+                          </td>
+                          <td className={booth_arr[54]} onClick={() => handleButton(54)}>
+                            <p>54</p>
+                            <span className="price">{prices[54]}</span>
+                          </td>
+                          <td className={booth_arr[55]} onClick={() => handleButton(55)}>
+                            <p>55</p>
+                            <span className="price">{prices[55]}</span>
+                          </td>
+                          <td className={booth_arr[56]} onClick={() => handleButton(56)}>
+                            <p>56</p>
+                            <span className="price">{prices[56]}</span>
+                          </td>
                         </tr>
                         <tr>
                           <td className="btn btn-none" />
@@ -682,6 +877,10 @@ function Body() {
                     </fieldset>
                   </li>
                   <li className="register-item">
+                    <label>Booth available:</label>
+                    <label className="input no-outline">{boothAvailable()}</label>
+                  </li>
+                  <li className="register-item">
                     <fieldset>
                       <legend>Index of booth</legend>
                       <input
@@ -697,8 +896,8 @@ function Body() {
                     </fieldset>
                   </li>
                   <li className="register-item">
-                    <label>Booth available:</label>
-                    <label className="input no-outline">{boothAvailable()}</label>
+                    <label>Price:</label>
+                    <label className="input no-outline">{prices[Number(chooseIndex)]}</label>
                   </li>
                 </ul>
                 <div className="register-btn" onClick={() => RegisterButton()}>

@@ -38,6 +38,7 @@ ul{
     border-radius: 4px;
     text-align: center;
     font-size: 2.2rem;
+    position: relative;
 }
 .btn:hover{
     background-color: #1ae256;

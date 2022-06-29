@@ -200,3 +200,31 @@
     font-size: 1.8rem;
     padding: 12px;
 }
+
+/* -----------------price -------------- */
+.btn:hover .price {
+    display: block;
+}
+.price::before{
+    content: "";
+    border-width: 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent #000 transparent;
+    position: absolute;
+    right: 48px;
+    top: -18px;
+
+}
+
+.price {
+    z-index: 10;
+    border-radius: 4px;
+    position: absolute;
+    display: none;
+    font-weight: 400;
+    color: #fff;
+    background-color: #000;
+    padding: 4px 8px;
+    font-size: 1.6rem;
+    margin-top:16px;
+}
