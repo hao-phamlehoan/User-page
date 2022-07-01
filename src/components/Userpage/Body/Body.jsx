@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import callApi from "../../../api/callApi";
 import NotFound from "../../NotFound";
 import { data } from "jquery";
+import { CSVLink } from "react-csv";
 
 function Body() {
   // biến ẩn hiện phần tử
@@ -42,6 +43,8 @@ function Body() {
   const [representation, setRepresentation] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [email, setEmail] = React.useState('');
+  const [permit, setPermit] = React.useState('');
+
   const [chooseIndex, setIndex] = React.useState('');
   const [reloadBooth, setReloadBooth] = React.useState(false);
 
@@ -54,7 +57,6 @@ function Body() {
   const [Rejectarr, setRejectArr] = React.useState([]);
   const [Activearr, setActiveArr] = React.useState([]);
   const [Waitarr, setWaitArr] = React.useState([]);
-
   const [prices, setPrices] = React.useState([]);
 
   function initArr() {
@@ -249,26 +251,43 @@ function Body() {
     return Namearr[Namearr.length - 1];
   }
 
-  
+
   var [historyR, setHistoryR] = React.useState([]);
+  const headers = [
+    { label: 'ID', key: 'id' },
+    { label: 'Business', key: 'name' },
+    { label: 'Email', key: 'email' },
+    { label: 'Booth number', key: 'booth_id' },
+    { label: 'Price', key: 'price' },
+    { label: 'Time Register', key: 'time_register' },
+    { label: 'Time Approve', key: 'time_approve' },
+    { label: 'Approve', key: 'approve' },
+  ];
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         var Getuser = localStorage.getItem("user");
         const user = JSON.parse(Getuser);
-        {setIdUser(user.id)
-        setName(user.name);
-        setNameI(user.name);
-        setName_img(getNickName(user.representation));
-        setPhone(user.phone);
-        setPhoneI(user.phone);
-        setEmail(user.email)
-        setEmailI(user.email)
-        setRepresentation(user.representation);
-        setRepresentationI(user.representation);}
+        {
+          setIdUser(user.id)
+          setPermit(user.permit);
+          setName(user.name);
+          setNameI(user.name);
+          setName_img(getNickName(user.representation));
+          setPhone(user.phone);
+          setPhoneI(user.phone);
+          setEmail(user.email)
+          setEmailI(user.email)
+          setRepresentation(user.representation);
+          setRepresentationI(user.representation);
+        }
         const boothMap = await callApi.getBoothMap();
         var tmp = await callApi.getBooth(user.id);
+
+
+
+
         const loadToArr = () => {
           for (var i = 0; i < 64; i++) {
             if (boothMap.result[i].owner == user.id) {
@@ -292,7 +311,7 @@ function Body() {
             } else {
               Waitarr.push(tmp.result[i].booth_id);
             }
-            if (historyR.find(v => {return v.id === tmp.result[i].id})) {
+            if (historyR.find(v => { return v.id === tmp.result[i].id })) {
               continue
             } else {
               historyR.push(tmp.result[i]);
@@ -315,12 +334,15 @@ function Body() {
     )
   }
 
-  function TimeSQLtoJS (time) {
+  function TimeSQLtoJS(time) {
+    if (time == null) {
+      return "Chưa duyệt";
+    }
     var t = time.slice(12, 19);
     var d = time.slice(0, 10);
     return t + ' ' + d;
   }
- 
+
   return (
     <div className="app__container">
       <div className="grid wide">
@@ -329,6 +351,7 @@ function Body() {
             <div className="avatar">
               <img src={avatar_img} className="body-user-img" alt="" />
               <span className="body-user-name">{name_img}</span>
+              <i className={permit ?"body-user-icon fa-solid fa-circle-check" : "hide"}></i>
             </div>
             <div className="category">
               <ul className="category-list">
@@ -353,7 +376,7 @@ function Body() {
                     }
                   >
                     <i className="category-item-icon fa-solid fa-circle-user"></i>
-                    <span className="category-item-name">My information</span>
+                    <span className="category-item-name">My Information</span>
                   </div>
                 </li>
                 <li className="category-item">
@@ -378,7 +401,7 @@ function Body() {
                     }
                   >
                     <i className="category-item-icon fa-solid fa-map"></i>
-                    <span className="category-item-name">Booth map</span>
+                    <span className="category-item-name">Booth Map</span>
                   </div>
                 </li>
                 <li className="category-item">
@@ -402,7 +425,7 @@ function Body() {
                     }
                   >
                     <i className="category-item-icon fa-brands fa-wpforms" />
-                    <span className="category-item-name">Register form</span>
+                    <span className="category-item-name">Register Form</span>
                   </div>
                 </li>
                 <li className="category-item">
@@ -459,7 +482,7 @@ function Body() {
           <div className="col l-9 m-12 c-12">
             {visibleI && (
               <div className="information">
-                <span className="information-title">My information</span>
+                <span className="information-title">My Information</span>
                 <i className="edit-icon fa-solid fa-pen-to-square" onClick={() => handleChangeInfor()}></i>
                 <ul className="information-list">
                   <li className="information-item">
@@ -865,9 +888,22 @@ function Body() {
                 </div>
               </div>
             )}
-            {visibleR && (
+            {visibleR && permit === 1 && (
               <div id="RegisterForm" className="register">
-                <span className="information-title">Register form</span>
+                <span className="information-title">Register Form</span>
+                <ul className="register-list">
+                  <li className="register-item">
+                    <div class="alert alert-warning">
+                      <strong>Error!</strong>  Tài khoản này chưa được cho phép đăng ký gian hàng bởi Admin. Liên lạc tại : admin@gmail.com
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            )
+            }
+            {visibleR && permit === 0 && (
+              <div id="RegisterForm" className="register">
+                <span className="information-title">Register Form</span>
                 <ul className="register-list">
                   <li className="register-item">
                     <fieldset>
@@ -951,10 +987,12 @@ function Body() {
             )}
             {visibleH && (
               <div className="register">
+                <span className="RH-title">Register History</span>
                 {historyR.map((result, index) => {
                   return (
                     <div key={index} className="register-history">
-                      <a href={`#hr${index}`} className="form-title">{`Register form: ${index+1}. Booth: ${result.booth_id}`}</a>
+                      <a href={`#hr${index}`} className="form-title">{`Register form: ${index + 1}. Booth: ${result.booth_id}`}</a>
+                      <hr></hr>
                       <ul id={`hr${index}`} className="register-history-list">
                         <li className="register-history-item">
                           <label className="label1">Name: </label>
@@ -977,32 +1015,37 @@ function Body() {
                           <label className='label2'>{TimeSQLtoJS(result.time_register)}</label>
                         </li>
                         <li className="register-history-item">
-                          <label className="label1">Time approve: </label>
+                          <label className="label1">Time approve(reject): </label>
                           <label className='label2'>{TimeSQLtoJS(result.time_approve)}</label>
                         </li>
                         <li className="register-history-item">
                           <label className="label1">Status: </label>
-                          <label className='label2'>{result.approce ? 'Accept' : 'Reject'}</label>
+                          <label className='label2'>{(result.approve === 1) ? 'Accept' : ((result.approve === 0) ? 'Reject' : 'Waiting')}</label>
                         </li>
                       </ul>
                     </div>
                   )
                 })}
-                <div className="print">
+                <CSVLink data={historyR} headers={headers} filename={"history_register.csv"} className ="Download">Download</CSVLink>
+                {/* <div className="print">
                   <label className="print-label">Register Form: </label>
-                  <input 
-                    className="print-input" 
-                    type="number" 
-                    placeholder="Index of register form" 
+                  <input
+                    className="print-input"
+                    type="number"
+                    placeholder="Index of register form"
                     onChange={event => setPrintInput(event.target.value)}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
                         console.log(printInput)
                       }
-                    }}/>
-                  <button className="print-button" onClick={() => {console.log(printInput)}}>Print</button>
+                    }} />
+
+                  <button className="print-button" onClick={() => { console.log(printInput) }}>Print</button>
+
+                </div> */}
+                <div className="fake">
+
                 </div>
-                <div className="fake"></div>
               </div>
             )}
             {visibleP && (

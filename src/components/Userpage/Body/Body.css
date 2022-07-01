@@ -72,11 +72,11 @@
 .information-title{
     display: inline-block;
     color: var(--primary-color);
-    font-size: 5.0rem;
+    font-size: 4.0rem;
     padding: 48px 0px 8px 32px;
     font-weight: 700;
     word-wrap: break-word;
-    line-height: 5.2rem;
+    line-height: 4.2rem;
     text-align: left;
     width: 80%;
 }
@@ -264,7 +264,31 @@
     margin-left: 10px;
     color: #333;
 }
-
+.RH-title{
+    color: var(--primary-color);
+    font-size: 4rem;
+    display: block;
+    padding: 48px 0px 20px 32px;
+    font-weight: 700;
+    word-wrap: break-word;
+    line-height: 4.2rem;
+    text-align: left;
+}
+.Download{
+    font-size: 2rem;
+    color: #fff;
+    background-color: rgb(13, 115, 232);
+    display: flex;
+    justify-content: center;
+    padding: 8px 10px;
+    margin: 16px auto;
+    width: 16%;
+    min-width: 112px;
+    border-radius: 8px;
+}
+.Download:hover{
+    opacity: 0.8;
+}
 .print {
     background-color: #08a838;
     padding: 10px;
