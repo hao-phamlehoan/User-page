@@ -8,21 +8,25 @@ import big_logo from "../../../assets/User_img/big_logo.png";
 import { useEffect } from "react";
 import callApi from "../../../api/callApi";
 import NotFound from "../../NotFound";
+import { data } from "jquery";
 
 function Body() {
   // biến ẩn hiện phần tử
   const [visibleI, setVisibleI] = React.useState(true);
   const [visibleB, setVisibleB] = React.useState(false);
   const [visibleR, setVisibleR] = React.useState(false);
+  const [visibleH, setVisibleH] = React.useState(false);
   const [visibleP, setVisibleP] = React.useState(false);
   // biến thêm css 
   const [isActiveI, setActiveI] = React.useState(true);
   const [isActiveB, setActiveB] = React.useState(false);
   const [isActiveR, setActiveR] = React.useState(false);
+  const [isActiveH, setActiveH] = React.useState(false);
   const [isActiveP, setActiveP] = React.useState(false);
 
   const [changeInfor, setChangeInfor] = React.useState(false);
 
+  const [printInput, setPrintInput] = React.useState('');
 
   const [avatar_img, setAvatar_img] = React.useState(ava);
   const [name_img, setName_img] = React.useState('')
@@ -170,11 +174,6 @@ function Body() {
       callApi.putInformation(newUser);
       localStorage.setItem('user', JSON.stringify(newUser1));
       alert("Save successful");
-      // setName(nameI);
-      // setName_img(nameI);
-      // setPhone(phoneI);
-      // setEmail(emailI)
-      // setRepresentation(representationI);
       window.location.reload(false);
     } catch (error) {
       console.log("Failed to post: ", error);
@@ -250,13 +249,15 @@ function Body() {
     return Namearr[Namearr.length - 1];
   }
 
+  
+  var [historyR, setHistoryR] = React.useState([]);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         var Getuser = localStorage.getItem("user");
         const user = JSON.parse(Getuser);
-        setIdUser(user.id)
+        {setIdUser(user.id)
         setName(user.name);
         setNameI(user.name);
         setName_img(getNickName(user.representation));
@@ -265,9 +266,9 @@ function Body() {
         setEmail(user.email)
         setEmailI(user.email)
         setRepresentation(user.representation);
-        setRepresentationI(user.representation);
+        setRepresentationI(user.representation);}
         const boothMap = await callApi.getBoothMap();
-        const boothid = await callApi.getBooth(user.id);
+        var tmp = await callApi.getBooth(user.id);
         const loadToArr = () => {
           for (var i = 0; i < 64; i++) {
             if (boothMap.result[i].owner == user.id) {
@@ -285,11 +286,16 @@ function Body() {
             }
             prices[i + 1] = boothMap.result[i].price;
           }
-          for (var i in boothid.result) {
-            if (Waitarr.find(v => { return v === boothid.result[i].booth_id })) {
+          for (var i in tmp.result) {
+            if (Waitarr.find(v => { return v === tmp.result[i].booth_id })) {
               continue
             } else {
-              Waitarr.push(boothid.result[i].booth_id);
+              Waitarr.push(tmp.result[i].booth_id);
+            }
+            if (historyR.find(v => {return v.id === tmp.result[i].id})) {
+              continue
+            } else {
+              historyR.push(tmp.result[i]);
             }
           }
         }
@@ -309,6 +315,12 @@ function Body() {
     )
   }
 
+  function TimeSQLtoJS (time) {
+    var t = time.slice(12, 19);
+    var d = time.slice(0, 10);
+    return t + ' ' + d;
+  }
+ 
   return (
     <div className="app__container">
       <div className="grid wide">
@@ -330,6 +342,8 @@ function Body() {
                       setActiveI(true);
                       setActiveB(false);
                       setActiveR(false);
+                      setActiveH(false);
+                      setVisibleH(false);
                       setActiveP(false);
                     }}
                     className={
@@ -353,6 +367,8 @@ function Body() {
                       setActiveB(true);
                       setActiveR(false);
                       setActiveP(false);
+                      setActiveH(false);
+                      setVisibleH(false);
                       setBooth_arr(initArr());
                     }}
                     className={
@@ -376,6 +392,8 @@ function Body() {
                       setActiveB(false);
                       setActiveR(true);
                       setActiveP(false);
+                      setActiveH(false);
+                      setVisibleH(false);
                     }}
                     className={
                       isActiveR
@@ -393,11 +411,37 @@ function Body() {
                       setVisibleI(false);
                       setVisibleB(false);
                       setVisibleR(false);
+                      setVisibleP(false);
+                      setActiveI(false);
+                      setActiveB(false);
+                      setActiveR(false);
+                      setActiveP(false);
+                      setActiveH(true);
+                      setVisibleH(true);
+                    }}
+                    className={
+                      isActiveH
+                        ? "category-item-link category-item-link-active"
+                        : "category-item-link"
+                    }
+                  >
+                    <i className="category-item-icon fa-solid fa-clock-rotate-left" />
+                    <span className="category-item-name">Register History</span>
+                  </div>
+                </li>
+                <li className="category-item">
+                  <div
+                    onClick={function () {
+                      setVisibleI(false);
+                      setVisibleB(false);
+                      setVisibleR(false);
                       setVisibleP(true);
                       setActiveI(false);
                       setActiveB(false);
                       setActiveR(false);
                       setActiveP(true);
+                      setActiveH(false);
+                      setVisibleH(false);
                     }}
                     className={
                       isActiveP
@@ -506,15 +550,15 @@ function Body() {
                               <span className="price">{prices[5]}</span>
                             </td>
                             <td className={booth_arr[6]} onClick={() => handleButton(6)}>
-                              <p>6-</p>
+                              <p>6</p>
                               <span className="price">{prices[6]}</span>
                             </td>
                             <td className={booth_arr[7]} onClick={() => handleButton(7)}>
-                              <p>7-</p>
+                              <p>7</p>
                               <span className="price">{prices[7]}</span>
                             </td>
                             <td className={booth_arr[8]} onClick={() => handleButton(8)}>
-                              <p>8-</p>
+                              <p>8</p>
                               <span className="price">{prices[8]}</span>
                             </td>
                             <td className="btn btn-none" />
@@ -564,7 +608,7 @@ function Body() {
                           <tr>
                             <td className="btn btn-none" />
                             <td className={booth_arr[9]} onClick={() => handleButton(9)}>
-                              <p>9-</p>
+                              <p>9</p>
                               <span className="price">{prices[9]}</span>
                             </td>
                             <td className={booth_arr[10]} onClick={() => handleButton(10)}>
@@ -638,11 +682,11 @@ function Body() {
                         </tr>
                         <tr>
                           <td className={booth_arr[1]} onClick={() => handleButton(1)}>
-                            <p>1-</p>
+                            <p>1</p>
                             <span className="price">{prices[1]}</span>
                           </td>
                           <td className={booth_arr[2]} onClick={() => handleButton(2)}>
-                            <p>2-</p>
+                            <p>2</p>
                             <span className="price">{prices[2]}</span>
                           </td>
                           <td className="btn btn-none" />
@@ -716,11 +760,11 @@ function Body() {
                         </tr>
                         <tr>
                           <td className={booth_arr[3]} onClick={() => handleButton(3)}>
-                            <p>3-</p>
+                            <p>3</p>
                             <span className="price">{prices[3]}</span>
                           </td>
                           <td className={booth_arr[4]} onClick={() => handleButton(4)}>
-                            <p>4-</p>
+                            <p>4</p>
                             <span className="price">{prices[4]}</span>
                           </td>
                           <td className="btn btn-none" />
@@ -905,6 +949,62 @@ function Body() {
                 </div>
               </div>
             )}
+            {visibleH && (
+              <div className="register">
+                {historyR.map((result, index) => {
+                  return (
+                    <div key={index} className="register-history">
+                      <a href={`#hr${index}`} className="form-title">{`Register form: ${index+1}. Booth: ${result.booth_id}`}</a>
+                      <ul id={`hr${index}`} className="register-history-list">
+                        <li className="register-history-item">
+                          <label className="label1">Name: </label>
+                          <label className='label2'>{result.name}</label>
+                        </li>
+                        <li className="register-history-item">
+                          <label className="label1">Email: </label>
+                          <label className='label2'>{result.email}</label>
+                        </li>
+                        <li className="register-history-item">
+                          <label className="label1">Index of booth: </label>
+                          <label className='label2'>{result.booth_id}</label>
+                        </li>
+                        <li className="register-history-item">
+                          <label className="label1">Price: </label>
+                          <label className='label2'>{result.price}</label>
+                        </li>
+                        <li className="register-history-item">
+                          <label className="label1">Time register: </label>
+                          <label className='label2'>{TimeSQLtoJS(result.time_register)}</label>
+                        </li>
+                        <li className="register-history-item">
+                          <label className="label1">Time approve: </label>
+                          <label className='label2'>{TimeSQLtoJS(result.time_approve)}</label>
+                        </li>
+                        <li className="register-history-item">
+                          <label className="label1">Status: </label>
+                          <label className='label2'>{result.approce ? 'Accept' : 'Reject'}</label>
+                        </li>
+                      </ul>
+                    </div>
+                  )
+                })}
+                <div className="print">
+                  <label className="print-label">Register Form: </label>
+                  <input 
+                    className="print-input" 
+                    type="number" 
+                    placeholder="Index of register form" 
+                    onChange={event => setPrintInput(event.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        console.log(printInput)
+                      }
+                    }}/>
+                  <button className="print-button" onClick={() => {console.log(printInput)}}>Print</button>
+                </div>
+                <div className="fake"></div>
+              </div>
+            )}
             {visibleP && (
               <div className="register">
                 <span className="information-title">Change Password</span>
@@ -927,7 +1027,6 @@ function Body() {
                       <input className="input no-outline" type="password" onChange={event => setConfpass(event.target.value)} required />
                     </fieldset>
                   </li>
-
                 </ul>
                 <div className="register-btn" onClick={() => handleChangePass()}>
                   <span>Change</span>

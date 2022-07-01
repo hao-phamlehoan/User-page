@@ -228,3 +228,83 @@
     font-size: 1.6rem;
     margin-top:16px;
 }
+
+/* ------------- history register -------------- */
+.register-history {
+    padding: 16px;
+}
+
+.form-title {
+    font-size: 2.0rem;
+    color: #08a838;
+}
+
+.form-title:target {
+    background-color: #08a838;
+    color: #fff;
+
+}
+.register-history-list:target {
+    display: block;
+}
+
+.register-history-list {
+    margin: 16px;
+    display: none;
+}
+
+.label1 {
+    font-size: 1.8rem;
+    line-height: 2rem;
+    color: #000;
+}
+.label2 {
+    font-size: 1.8rem;
+    line-height: 1.8rem;
+    margin-left: 10px;
+    color: #333;
+}
+
+.print {
+    background-color: #08a838;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+}
+
+.print-label {
+    font-size: 2.0rem;
+    color: #fff;
+    margin: 0 8px 0 0;
+}
+
+.print-input {
+    font-size: 2.0rem;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 4px 4px;
+    line-height: 2.2rem;
+}
+.print-input:focus {
+    outline: none;
+}
+.print-button {
+    margin-left: 16px;
+    font-size: 2rem;
+    padding: 4px 8px;
+    border-radius: 8px;
+    background-color: rgb(7 207 231);
+}
+.print-button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+.fake {
+    height: 1px;
+    width: 1px;
+    background-color: #fff;
+}
