@@ -12,7 +12,7 @@ function Contact() {
                     <div className = "info">
                         <div><span><FaLocationArrow/></span><p>Ho Chi Minh City University of Technology. Di An, Binh Duong</p></div>
                         <div><span><FaEnvelope/></span><p>dtn-ktmt@hcmut.edu.vn</p></div>
-                        <div><span><FaPhoneSquareAlt/></span><p>123-456-789</p></div>
+                        <div><span><FaPhoneSquareAlt/></span><p>0123-456-789</p></div>
                     </div>
                 </div>
             </div>

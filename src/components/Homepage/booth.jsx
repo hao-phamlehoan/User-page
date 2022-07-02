@@ -1,23 +1,27 @@
 import React from "react";
 import "react-slideshow-image/dist/styles.css";
 import { Fade } from "react-slideshow-image";
+import p1 from "../../assets/HomePages_img/4.jpg"
+import p2 from "../../assets/HomePages_img/1.jpg"
+import p3 from "../../assets/HomePages_img/2.jpg"
+import p4 from "../../assets/HomePages_img/3.jpg"
 import "./Organization.css"
 
 const slides = [
     {
-        url: "https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+        url: p1,
         caption: ''
     },
     {
-        url: "https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80",
+        url: p2,
         caption: ''
     },
     {
-        url: "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+        url: p3,
         caption: ''
     },
     {
-        url: "https://images.unsplash.com/photo-1444525873963-75d329ef9e1b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+        url: p4,
         caption: ''
     },
 ];

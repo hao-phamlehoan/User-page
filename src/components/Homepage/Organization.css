@@ -14,7 +14,8 @@
     z-index: 2;
 }
 .organization img {
-    width: 100%;
+    /* width: ; */
+    height: 900px;
     display: block;
     margin: auto;
 }
