@@ -170,6 +170,7 @@ function Body() {
         "id": idUser,
         "name": nameI,
         "password": user.password,
+        "permit": permit,
         "phone": phoneI,
         "representation": representationI,
       }
@@ -268,26 +269,24 @@ function Body() {
     const fetchUser = async () => {
       try {
         var Getuser = localStorage.getItem("user");
-        const user = JSON.parse(Getuser);
-        {
-          setIdUser(user.id)
-          setPermit(user.permit);
-          setName(user.name);
-          setNameI(user.name);
-          setName_img(getNickName(user.representation));
-          setPhone(user.phone);
-          setPhoneI(user.phone);
-          setEmail(user.email)
-          setEmailI(user.email)
-          setRepresentation(user.representation);
-          setRepresentationI(user.representation);
-        }
+        var user = JSON.parse(Getuser);
+        var getapiuser = await callApi.getUser(user.id);
+        localStorage.setItem('user', JSON.stringify(getapiuser.result[0]));
+        Getuser = localStorage.getItem("user");
+        user = JSON.parse(Getuser);
+        setIdUser(user.id)
+        setPermit(user.permit);
+        setName(user.name);
+        setNameI(user.name);
+        setName_img(getNickName(user.representation));
+        setPhone(user.phone);
+        setPhoneI(user.phone);
+        setEmail(user.email)
+        setEmailI(user.email)
+        setRepresentation(user.representation);
+        setRepresentationI(user.representation);
         const boothMap = await callApi.getBoothMap();
         var tmp = await callApi.getBooth(user.id);
-
-
-
-
         const loadToArr = () => {
           for (var i = 0; i < 64; i++) {
             if (boothMap.result[i].owner == user.id) {
@@ -888,7 +887,7 @@ function Body() {
                 </div>
               </div>
             )}
-            {visibleR && permit === 1 && (
+            {visibleR && permit === 0 && (
               <div id="RegisterForm" className="register">
                 <span className="information-title">Register Form</span>
                 <ul className="register-list">
@@ -901,7 +900,7 @@ function Body() {
               </div>
             )
             }
-            {visibleR && permit === 0 && (
+            {visibleR && permit === 1 && (
               <div id="RegisterForm" className="register">
                 <span className="information-title">Register Form</span>
                 <ul className="register-list">

@@ -35,10 +35,10 @@ const Header = ({ Login }) => {
                     <FaAlignJustify size={40} id="mobile_icon" />
                     <div id="header_nav">
                         <div className="m_container">
-                            <Link smooth to="User-page/#hero"><a>Home</a></Link>
-                            <Link smooth to="User-page/#booth"><a>Booth</a></Link>
-                            <Link smooth to="User-page/#organization"><a>Organization</a></Link>
-                            <Link smooth to="User-page/#contact"><a>Contact</a></Link>
+                            <Link smooth to="User-page/#hero"><p>Home</p></Link>
+                            <Link smooth to="User-page/#booth"><p>Booth</p></Link>
+                            <Link smooth to="User-page/#organization"><p>Organization</p></Link>
+                            <Link smooth to="User-page/#contact"><p>Contact</p></Link>
                         </div>
                     </div>
                 </div>
