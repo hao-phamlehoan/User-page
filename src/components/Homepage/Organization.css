@@ -1,0 +1,20 @@
+.organization {
+    position: relative;
+}
+.or-title {
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 20px ;
+    background-color: aliceblue;
+    font-size: 4rem;
+    font-weight: 600;
+    color: rgb(12, 59, 213);
+    position: absolute;
+    z-index: 2;
+}
+.organization img {
+    width: 100%;
+    display: block;
+    margin: auto;
+}
