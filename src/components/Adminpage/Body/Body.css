@@ -27,13 +27,6 @@
     font-weight: 600;
     padding: 12px 0 16px 0;
 }
-.body-user-icon{
-    display: flex;
-    justify-content: center;
-    font-size: 2.0rem;
-    color: rgb(13, 115, 232);
-    padding: 8px 0 16px 0;
-}
 .category{
     background-color: #fff;
     border-radius: 4px;

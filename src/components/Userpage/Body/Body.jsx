@@ -154,16 +154,20 @@ function Body() {
     setIndex(index);
   }
 
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   const handleSaveInfor = async () => {
     try {
       const newUser = {
         "id": idUser,
         "name": nameI,
         "phone": phoneI,
-        "email": emailI,
         "representation": representationI
       }
-      var Getuser = localStorage.getItem("user");
+      callApi.putInformation(newUser);
+      const Getuser = localStorage.getItem("user");
       const user = JSON.parse(Getuser);
       const newUser1 = {
         "email": emailI,
@@ -174,9 +178,15 @@ function Body() {
         "phone": phoneI,
         "representation": representationI,
       }
-      callApi.putInformation(newUser);
+      console.log(newUser1)
+      console.log('new: ', newUser)
       localStorage.setItem('user', JSON.stringify(newUser1));
       alert("Save successful");
+      for (let i = 0; i < 2; i++) {
+        console.log(`Waiting ${i} seconds...`);
+        await sleep(i * 1000);
+      }
+      console.log('Done');
       window.location.reload(false);
     } catch (error) {
       console.log("Failed to post: ", error);
@@ -267,6 +277,7 @@ function Body() {
 
   useEffect(() => {
     const fetchUser = async () => {
+      console.log(1);
       try {
         var Getuser = localStorage.getItem("user");
         var user = JSON.parse(Getuser);
@@ -305,7 +316,7 @@ function Body() {
             prices[i + 1] = boothMap.result[i].price;
           }
           for (var i in tmp.result) {
-            if (Waitarr.find(v => { return v === tmp.result[i].booth_id })) {
+            if (tmp.result[i].approve === 0 || Waitarr.find(v => { return v === tmp.result[i].booth_id })) {
               continue
             } else {
               Waitarr.push(tmp.result[i].booth_id);
@@ -327,6 +338,7 @@ function Body() {
   }, [reloadBooth])
 
   const login = localStorage.getItem("isLogined");
+
   if (login != "true") {
     return (
       <NotFound></NotFound>
@@ -350,7 +362,7 @@ function Body() {
             <div className="avatar">
               <img src={avatar_img} className="body-user-img" alt="" />
               <span className="body-user-name">{name_img}</span>
-              <i className={permit ?"body-user-icon fa-solid fa-circle-check" : "hide"}></i>
+              <i className={permit ? "body-user-icon fa-solid fa-circle-check" : "hide"}></i>
             </div>
             <div className="category">
               <ul className="category-list">
@@ -1025,7 +1037,7 @@ function Body() {
                     </div>
                   )
                 })}
-                <CSVLink data={historyR} headers={headers} filename={"history_register.csv"} className ="Download">Download</CSVLink>
+                <CSVLink data={historyR} headers={headers} filename={"history_register.csv"} className="Download">Download</CSVLink>
                 {/* <div className="print">
                   <label className="print-label">Register Form: </label>
                   <input

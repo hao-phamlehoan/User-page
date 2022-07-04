@@ -28,7 +28,7 @@ const slides = [
 
 const Booth = () => {
     return (
-        <div id="booth" className="organization">
+        <div id="booth">
             <span className="or-title">Booth</span>
             <Fade>
                 {slides.map((x) => {

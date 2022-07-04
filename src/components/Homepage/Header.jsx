@@ -44,19 +44,21 @@ const Header = ({ Login }) => {
                 </div>
                 {Login ? (
                     <div id="header_login">
-                        <div className="header__navbar-user" onClick={() => {
+                        <div className="header__navbar-user" 
+                            onClick={() => {
                             if (location.pathname !== "/User-page/user" && localStorage.getItem("admin") == "false") navigate("/User-page/user", { replace: true })
                             else if (location.pathname !== "/User-page/admin" && localStorage.getItem("admin") == "true") navigate("/User-page/admin", { replace: true })
-                        }}>
+                            }}>
                             <img src={avatar} alt="" className="header-user-img" />
                             <span className="header-user-name">{getNickName()}</span>
-                            <Link smooth to="/User-page/">
+
                                 <ul className="header__navbar-user-menu">
-                                    <li onClick={Logout} className="header__navbar-user-item">
+                                    <Link smooth to="/User-page/">
+                                        <li onClick={Logout} className="header__navbar-user-item">
                                         Log out
-                                    </li>
+                                        </li>
+                                    </Link>
                                 </ul>
-                            </Link>
                         </div>
                     </div>
                 ) : (
