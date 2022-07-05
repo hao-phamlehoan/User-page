@@ -1,0 +1,94 @@
+:root{
+    --white-color: #fff;
+    --black-color: #000;
+    --text-color: #333;
+    --background-color: #C9F0C3;
+    --primary-color: #00902A;
+    --border-color: #3a3a3a;
+    --header-height: 100px;
+}
+
+.hide{
+    display: none;
+}
+
+*{
+    box-sizing: inherit;
+}
+
+html{
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: sans-serif;
+    box-sizing: border-box;
+    background-color: var(--background-color);
+}
+a{
+    text-decoration: none;
+
+}
+ul{
+    list-style:none;
+}
+
+.btn{
+    width: 40px;
+    height: 40px;
+    background-color: #c4c4c4;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 2.2rem;
+    position: relative;
+}
+.btn:hover{
+    background-color: #1ae256;
+    cursor: pointer;
+}
+.btn-none{
+    background-color: #fff !important;
+    cursor: default !important;
+    width: 30px;
+}
+.btn-active{
+    background-color: var(--primary-color) !important;
+    color: #fff;
+}
+.btn-reject{
+    background-color: #ff5050 !important;
+    color: #fff;
+}
+.btn-wait{
+    background-color: #ea9605 !important;
+    color: #fff;
+}
+.btn-note{
+    cursor: default;
+    width: 40px;
+    height: 40px;
+    background-color: #c4c4c4;
+    border-radius: 4px;
+}
+fieldset {
+    border: 1px solid #333;
+    border-radius: 4px;
+    text-align: left;
+}
+fieldset > legend{
+    margin-left: 12px;
+}
+
+.input {
+    width: 98%;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: #fff;
+    margin: 4px 0 8px 8px;
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+
+.no-outline:focus {
+    outline: none;
+}

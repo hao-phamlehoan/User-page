@@ -1,0 +1,334 @@
+.app__container{
+    padding-top: var(--header-height);
+    flex: 1;
+    min-width: 548px;
+}
+
+.app__content{
+    margin-top: 16px;
+}
+.avatar{
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.body-user-img{
+    border-radius: 100%;
+    max-width: 200px;
+    margin: auto;
+}
+.body-user-name{
+    display: flex;
+    justify-content: center;
+    font-size: 2.0rem;
+    font-weight: 600;
+    padding: 12px 0 16px 0;
+
+}
+.category{
+    background-color: #fff;
+    border-radius: 4px;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+.category-list{
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin: 0;
+}
+
+.category-item-link{ 
+    display: block;   
+    color: var(--text-color);
+    padding: 12px;
+    
+}
+.category-item-link:hover{
+    background-color: #08a838;
+    border-radius: 8px;
+}
+.category-item-link-active{
+    background-color: var(--primary-color) !important   ;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.category-item-name{
+    margin-left: 12px;
+    line-height: 2.2rem;
+}
+
+/* -------------------Information----------------------- */
+.information{
+    background-color: #fff;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.information-title{
+    display: inline-block;
+    color: var(--primary-color);
+    font-size: 4.0rem;
+    padding: 48px 0px 8px 32px;
+    font-weight: 700;
+    word-wrap: break-word;
+    line-height: 4.2rem;
+    text-align: left;
+    width: 80%;
+}
+.edit-icon{
+    font-size: 2.4rem;
+    color: #08a838;
+    float: right;
+    padding: 20px;
+    margin: 50px 16px 0 0;
+}
+.edit-icon:hover{
+    cursor: pointer;
+    opacity: 0.6;
+}
+.information-list{
+    display: block;
+    padding: 28px 16px 26px 16px;
+    margin: 0;
+}
+.information-item{
+    font-size: 1.8rem;
+    padding: 12px;
+}
+
+.save-btn{
+    color: #fff;
+    padding: 0 0 16px 0; 
+    display: flex;
+    justify-content: center;
+    min-width: 150px;
+}
+.save-btn:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+.save-btn span{
+    padding: 16px;
+    background-color: var(--primary-color);
+    font-size: 2.2rem;
+    font-weight: 400;
+    border-radius: 8px;
+}
+
+/* -----------------Booth Map-------------- */
+
+.booth-map{
+    background-color: #fff;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    min-width: 548px;
+}
+.booth{
+    padding: 16px;
+}
+.h6-building{
+    background-color: #C4C4C4;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.h6-block{
+    background-color: #C4C4C4;
+    height: 200px;
+    width: 14%;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    display: inline-block;
+}
+.booth-behind-map{
+    display: inline-block;
+    width: 84%;
+}
+
+.note-list{
+    display: flex;
+    justify-content: space-around;
+}
+.note-item{
+    display: flex;
+}
+.note-item span{
+    font-size: 1.8rem;
+    line-height: 40px;
+    margin-left: 16px;
+}
+
+/* -------------Register------------------- */
+.register{
+    background-color: #fff;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.register-btn{
+    color: #ffffff;
+    padding: 0 0 16px 0; 
+    display: flex;
+    justify-content: center;
+    min-width: 150px;
+}
+.register-btn:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+.register-btn span{
+    padding: 16px;
+    background-color: #ff5050;
+    font-size: 2.2rem;
+    font-weight: 400;
+    border-radius: 8px;
+}
+.register-list{
+    display: block;
+    padding: 28px 16px 26px 16px;
+    margin: 0;
+}
+.register-item{
+    font-size: 1.8rem;
+    padding: 12px;
+}
+
+/* -----------------price -------------- */
+.btn:hover .price {
+    display: block;
+}
+.price::before{
+    content: "";
+    border-width: 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent #000 transparent;
+    position: absolute;
+    right: 48px;
+    top: -18px;
+
+}
+
+.price {
+    z-index: 10;
+    border-radius: 4px;
+    position: absolute;
+    display: none;
+    font-weight: 400;
+    color: #fff;
+    background-color: #000;
+    padding: 4px 8px;
+    font-size: 1.6rem;
+    margin-top:16px;
+}
+
+/* ------------- history register -------------- */
+.register-history {
+    padding: 16px;
+}
+
+.form-title {
+    font-size: 2.0rem;
+    color: #08a838;
+}
+
+.form-title:target {
+    background-color: #08a838;
+    color: #fff;
+
+}
+.register-history-list:target {
+    display: block;
+}
+
+.register-history-list {
+    margin: 16px;
+    display: none;
+}
+
+.label1 {
+    font-size: 1.8rem;
+    line-height: 2rem;
+    color: #000;
+}
+.label2 {
+    font-size: 1.8rem;
+    line-height: 1.8rem;
+    margin-left: 10px;
+    color: #333;
+}
+.RH-title{
+    color: var(--primary-color);
+    font-size: 4rem;
+    display: block;
+    padding: 48px 0px 20px 32px;
+    font-weight: 700;
+    word-wrap: break-word;
+    line-height: 4.2rem;
+    text-align: left;
+}
+.Download{
+    font-size: 2rem;
+    color: #fff;
+    background-color: rgb(13, 115, 232);
+    display: flex;
+    justify-content: center;
+    padding: 8px 10px;
+    margin: 16px auto;
+    width: 16%;
+    min-width: 112px;
+    border-radius: 8px;
+}
+.Download:hover{
+    opacity: 0.8;
+}
+.print {
+    background-color: #08a838;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+}
+
+.print-label {
+    font-size: 2.0rem;
+    color: #fff;
+    margin: 0 8px 0 0;
+}
+
+.print-input {
+    font-size: 2.0rem;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 4px 4px;
+    line-height: 2.2rem;
+}
+.print-input:focus {
+    outline: none;
+}
+.print-button {
+    margin-left: 16px;
+    font-size: 2rem;
+    padding: 4px 8px;
+    border-radius: 8px;
+    background-color: rgb(7 207 231);
+}
+.print-button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+.fake {
+    height: 1px;
+    width: 1px;
+    background-color: #fff;
+}

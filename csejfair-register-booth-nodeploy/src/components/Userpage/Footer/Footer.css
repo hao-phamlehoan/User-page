@@ -1,0 +1,31 @@
+#footer1 {
+    background: #666666;
+    color: white;
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    min-width: 548px;
+}
+#footer1 p {
+    font-weight: bold;
+    width: 70%;
+}
+
+#footer1 img {
+    margin-right: 10px;
+}
+
+#footer1 .m_container > span a{
+    color: white;
+    margin: 10px;
+}
+
+#footer1 .m_container > span a:hover{
+    color: #00902A;
+}
+
+.footer-icon{
+    size: 40;
+}
