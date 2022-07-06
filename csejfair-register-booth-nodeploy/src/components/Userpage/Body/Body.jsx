@@ -10,6 +10,8 @@ import callApi from "../../../api/callApi";
 import NotFound from "../../NotFound";
 import { data } from "jquery";
 import { CSVLink } from "react-csv";
+import Select from "react-select";
+import Moment from "react-moment";
 
 function Body() {
   // biến ẩn hiện phần tử
@@ -112,18 +114,20 @@ function Body() {
       setEmailI(value)
     }
   }
-
+  
+  const [boothAvai, setBoothAvai] = React.useState([])
   function boothAvailable() {
     var a = []
-    var count = 0;
     for (var i = 1; i < 65; i++) {
       if (!Rejectarr.find(v => { return v === i }) && !Activearr.find(v => { return v === i }) &&
-        !Waitarr.find(v => { return v === i }) && count < 5) {
-        a.push(i);
-        count++;
+        !Waitarr.find(v => { return v === i })) {
+        a.push({
+          "value": i,
+          "label": i
+        });
       }
     }
-    return a.toString() + ',...'
+    return a;
   }
 
   const handleChangeInfor = () => {
@@ -252,6 +256,7 @@ function Body() {
     } else {
       alert('Password incorrect');
     }
+    window.location.reload(false);
   }
 
   function getNickName(name) {
@@ -332,6 +337,7 @@ function Body() {
       }
     }
     fetchUser();
+    setReloadBooth(false);
   }, [reloadBooth])
 
   const login = localStorage.getItem("isLogined");
@@ -399,7 +405,7 @@ function Body() {
                       setActiveP(false);
                       setActiveH(false);
                       setVisibleH(false);
-                      setBooth_arr(initArr());
+                      setReloadBooth(true);
                     }}
                     className={
                       isActiveB
@@ -424,6 +430,8 @@ function Body() {
                       setActiveP(false);
                       setActiveH(false);
                       setVisibleH(false);
+                      setIndex(0);
+                      setBoothAvai(boothAvailable());
                     }}
                     className={
                       isActiveR
@@ -902,71 +910,36 @@ function Body() {
                   <li className="register-item">
                     <fieldset>
                       <legend>Name</legend>
-                      <input
-                        id="name"
-                        className="input no-outline"
-                        type="text"
-                        value={name}
-                        onChange={(e) => handleInputRegister(e)}
-                        required
-                      />
+                      <p className="input">{name}</p>
                     </fieldset>
                   </li>
                   <li className="register-item">
                     <fieldset>
                       <legend>Representation</legend>
-                      <input
-                        id="representation"
-                        className="input no-outline"
-                        type="text" value={representation}
-                        onChange={(e) => handleInputRegister(e)}
-                        required
-                      />
+                      <p className="input">{representation}</p>
                     </fieldset>
                   </li>
                   <li className="register-item">
                     <fieldset>
                       <legend>Phone number</legend>
-                      <input
-                        id="phone"
-                        className="input no-outline"
-                        type="text"
-                        value={phone}
-                        onChange={(e) => handleInputRegister(e)}
-                        required
-                      />
+                      <p className="input">{phone}</p>
                     </fieldset>
                   </li>
                   <li className="register-item">
                     <fieldset>
                       <legend>Email</legend>
-                      <input
-                        id="email"
-                        className="input no-outline"
-                        type="email"
-                        value={email}
-                        onChange={(e) => handleInputRegister(e)}
-                        required
-                      />
+                      <p className="input">{email}</p>
                     </fieldset>
-                  </li>
-                  <li className="register-item">
-                    <label>Booth available:</label>
-                    <label className="input no-outline">{boothAvailable()}</label>
                   </li>
                   <li className="register-item">
                     <fieldset>
                       <legend>Index of booth</legend>
-                      <input
-                        className="input no-outline"
-                        type="number"
-                        value={chooseIndex}
-                        onChange={(e) => handleIndexRegister(e)}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter') {
-                            RegisterButton();
-                          }
-                        }} />
+                      <Select 
+                        className="input no-outline" 
+                        options={boothAvai} 
+                        defaultValue={chooseIndex === 0 ? null : {"value": chooseIndex, "label": chooseIndex}} 
+                        onChange={(e)=>{setIndex(e.value)}}
+                        />
                     </fieldset>
                   </li>
                   <li className="register-item">
@@ -974,8 +947,8 @@ function Body() {
                     <label className="input no-outline">{prices[Number(chooseIndex)]}</label>
                   </li>
                 </ul>
-                <div className="register-btn" onClick={() => RegisterButton()}>
-                  <span>REGISTER</span>
+                <div className="register-btn">
+                  <span onClick={() => RegisterButton()}>REGISTER</span>
                 </div>
               </div>
             )}
@@ -1006,11 +979,19 @@ function Body() {
                         </li>
                         <li className="register-history-item">
                           <label className="label1">Time register: </label>
-                          <label className='label2'>{TimeSQLtoJS(result.time_register)}</label>
+                          <label className='label2'>
+                            <Moment format="YYYY-MM-DD HH:mm">
+                              {result.time_register}
+                            </Moment> 
+                          </label>
                         </li>
                         <li className="register-history-item">
                           <label className="label1">Time approve(reject): </label>
-                          <label className='label2'>{TimeSQLtoJS(result.time_approve)}</label>
+                          <label className='label2'>
+                            <Moment format="YYYY-MM-DD HH:mm">
+                              {result.time_approve}
+                            </Moment>
+                          </label>
                         </li>
                         <li className="register-history-item">
                           <label className="label1">Status: </label>
@@ -1021,22 +1002,7 @@ function Body() {
                   )
                 })}
                 <CSVLink data={historyR} headers={headers} filename={"history_register.csv"} className ="Download">Download</CSVLink>
-                {/* <div className="print">
-                  <label className="print-label">Register Form: </label>
-                  <input
-                    className="print-input"
-                    type="number"
-                    placeholder="Index of register form"
-                    onChange={event => setPrintInput(event.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        console.log(printInput)
-                      }
-                    }} />
-
-                  <button className="print-button" onClick={() => { console.log(printInput) }}>Print</button>
-
-                </div> */}
+                
                 <div className="fake">
 
                 </div>

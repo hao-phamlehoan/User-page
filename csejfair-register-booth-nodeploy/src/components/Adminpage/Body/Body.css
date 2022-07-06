@@ -174,38 +174,7 @@
 }
 
 /* -------------Register------------------- */
-.register{
-    background-color: #fff;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-.register-btn{
-    color: #ffffff;
-    padding: 0 0 16px 0; 
-    display: flex;
-    justify-content: center;
-    min-width: 150px;
-}
-.register-btn:hover{
-    opacity: 0.8;
-    cursor: pointer;
-}
-.register-btn span{
-    padding: 16px;
-    background-color: #ff5050;
-    font-size: 2.2rem;
-    font-weight: 400;
-    border-radius: 8px;
-}
-.register-list{
-    display: block;
-    padding: 28px 16px 0px 16px;
-    margin: 0;
-}
-.register-item{
-    font-size: 1.8rem;
-    padding: 12px;
-}
+
 
 /* ------------ //----------------- */
 
